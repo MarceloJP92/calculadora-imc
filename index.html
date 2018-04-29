@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Composição Corpora</title>
+	<style type="text/css">
+	
+	div#coluna_esquerda {	float: left;	border: 5px;	height: 80px; }
+	div#coluna_direita {	float: left;	border: 6px;	height: 70px;	}
 
+.bgimg {
+   
+    background-image: url('/img/money-2696229_960_720.jpg');
+     background-repeat: no-repeat;
+    background-size: 100% 100%;
+  } 
+
+	</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+function Calcular()
+  {
+var PS = parseFloat($("#Peso").val());
+var PE = parseFloat($("#Peitoral").val());
+var AB = parseFloat($("#Abdominal").val());
+var CO = parseFloat($("#Coxa").val());
+var TR = parseFloat($("#Triceps").val());
+var SU = parseFloat($("#Supra").val());
+var ID = parseFloat($("#Idade").val());
+var CX = parseFloat($("#Coxax").val());
+
+
+if (sexo.value== "Seleção"){
+	HOMENS= Peitoral+Abdominal+Coxa;
+
+}else{
+	MULHERES=Triceps+Supra+Coxax;
+}
+var J=PE+AB+CO; // soma de (Peitoral+Abdominal+Coxa)
+var N=TR+SU+CX; // soma de (Triceps+Supra+Coxax)
+var H = 1.10938 - 0.0008267 *(J)+0.0000016 *(J)*2- 0.0002574 *(ID);
+var M =1.099421 - 0.0009929 *(N)+ 0.0000023 *(N)*2- 0.0001392 *(ID);
+
+var G= [(4.95 / H) - 4.50] * 100;// gordura relativa 
+var C= [(4.95 / M) - 4.50] * 100;//gordura relativa 
+
+var D=PE*G; // DENS + peso
+var GA=D/ 100; // gordura absoluta
+var P = PE - GA;//Cálculo da massa magra
+
+
+  document.getElementById("HOMENS").innerHTML=H.toFixed(2);
+  document.getElementById("MULHERES").innerHTML = C.toFixed(2);
+
+ };
+
+//DENS = 1.10938 – 0.0008267 (PE+AB+CO) + 0.0000016 (PE+AB+CO)2 – 0.0002574 (ID);
+
+//DENS para HOMENS de 18 a 61 anos:
+//DENS = 1.10938 – 0.0008267 (X1) + 0.0000016 (X1)2 – 0.0002574 (X3)
+//DENS para MULHERES de 18 a 55 anos:
+//DENS = 1.099421 – 0.0009929 (X2) + 0.0000023 (X2)2 – 0.0001392 (X3)
+//Onde:
+//X1 = Soma das dobras: peitoral, abdominal e coxa
+//X2 = Soma das dobras: tríceps, supra-ilíaca e coxa
+//X3 = idade em anos
+//PROTOCOLO DE CONVERSÃO DA DENSIDADE CORPORAL EM PERCENTUAL DE GORDURA:
+//%G = [(4.95 / DENS) – 4.50] x 100
+//- Cálculo da gordura relativa (%) = %G
+//- Cálculo da gordura absoluta (kg) = (peso corporal x %G) / 100
+//- Cálculo da massa magra (kg) = peso corporal – gordura absoluta
+//- Massa corporal ideal (kg)* = massa magra / 0.85 (para homens)
+//= massa magra / 0.75 (para mulheres)
+//- Massa corporal desviante (kg)* = massa magra – massa corporal ideal
+//* estimada para população geral. Não necessariamente indivíduos abaixo dessa estimativa são
+//considerados não saudáveis – especialmente se fisicamente ativos.
+</script>
+</head>
+<body>
+<div class="bgimg">
+
+<input id="Peso" type="number"   min="0" max="200" placeholder="Peso" required  ><br><br>
+<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required >
+<select Id="sexo" name="sexo"> <option value="Seleção">Homem</options> <option value="Seleção">Mulher</options> </select> <br><br>
+<div id="coluna_esquerda">
+<p>Homens</p>
+<input id="Peitoral" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Peitoral" required="required"><br><br>
+<input id="Abdominal" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Abdominal" required="required" ><br><br>
+<input id="Coxa" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="coxa">
+</div>
+<div id="coluna_direita">
+   <p>Mulheres</p>
+<input id="Triceps" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Tríceps" ><br><br>
+<input id="Supra" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Supra-ilíaca" ><br><br>
+<input id="Coxax" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Coxa" ><br><br>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<button class="button" type="button" onclick ="Calcular()">Calcular</button><br>
+ <p ><b> T1: <span id="HOMENS"></span>
+    <p > T2 : <span Id="MULHERES"></span><h1></font>
+
+
+</body></html>

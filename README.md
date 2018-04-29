@@ -1,1 +1,1 @@
-https://marcelojp92.github.io/calculadora-imc/
+https://marcelojp92.github.io/calculadora-imc

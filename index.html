@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Composição Corpora</title>
+	<title> Composição Corporal</title>
 	<style type="text/css">
 	
 	div#coluna_esquerda {	float: left;	border: 5px;	height: 80px; }
@@ -23,36 +23,64 @@ var PS = parseFloat($("#Peso").val());
 var PE = parseFloat($("#Peitoral").val());
 var AB = parseFloat($("#Abdominal").val());
 var CO = parseFloat($("#Coxa").val());
+//var TR = parseFloat($("#Triceps").val());
+//var SU = parseFloat($("#Supra").val());
+var ID = parseFloat($("#Idade").val());
+//var CX = parseFloat($("#Coxax").val());
+
+var J=PE+AB+CO; // soma de (Peitoral+Abdominal+Coxa)
+//var N=TR+SU+CX; // soma de (Triceps+Supra+Coxax)
+var H = 1.10938 - 0.0008267 *(J)+0.0000016 *(J)*2- 0.0002574 *(ID);
+//var M =1.099421 - 0.0009929 *(N)+ 0.0000023 *(N)*2- 0.0001392 *(ID);
+var G= [(4.95 / H) - 4.50] * 100;// gordura relativa 
+//var C= [(4.95 / M) - 4.50] * 100;//gordura relativa 
+var D=PS*G; // DENS + peso
+var GA=D/ 100; // gordura absoluta
+var P= PS - GA;//Cálculo da massa magra
+var MI= P / 0.85;// Massa corporal ideal (para homens)
+//var MM= P / 0.75; //Massa corporal ideal (para mulheres)
+var MD= P -MI;//Massa corporal desviante (para homens)
+//var MDD= P -MM;//Massa corporal desviante (para mulheres)
+  document.getElementById("Percentual_de_Gordura").innerHTML=G.toFixed(2);
+  document.getElementById("Gordura_absoluta").innerHTML=GA.toFixed(2);
+  document.getElementById("Massa_magra_absoluta").innerHTML=P.toFixed(2);
+  document.getElementById("Massa_corporal_ideal").innerHTML=MI.toFixed(2);
+  document.getElementById("Massa_corporal_em_excesso").innerHTML=MD.toFixed(2);
+ }
+ 
+ function CalcularM()
+  {
+var ID = parseFloat($("#Idade").val());
+var PS = parseFloat($("#Peso").val());
 var TR = parseFloat($("#Triceps").val());
 var SU = parseFloat($("#Supra").val());
-var ID = parseFloat($("#Idade").val());
 var CX = parseFloat($("#Coxax").val());
 
-
-if (sexo.value== "Seleção"){
-	HOMENS= Peitoral+Abdominal+Coxa;
-
-}else{
-	MULHERES=Triceps+Supra+Coxax;
-}
-var J=PE+AB+CO; // soma de (Peitoral+Abdominal+Coxa)
 var N=TR+SU+CX; // soma de (Triceps+Supra+Coxax)
-var H = 1.10938 - 0.0008267 *(J)+0.0000016 *(J)*2- 0.0002574 *(ID);
 var M =1.099421 - 0.0009929 *(N)+ 0.0000023 *(N)*2- 0.0001392 *(ID);
-
-var G= [(4.95 / H) - 4.50] * 100;// gordura relativa 
 var C= [(4.95 / M) - 4.50] * 100;//gordura relativa 
-
-var D=PE*G; // DENS + peso
+var D=PS*C; // DENS + peso
 var GA=D/ 100; // gordura absoluta
-var P = PE - GA;//Cálculo da massa magra
+var P= PS - GA;//Cálculo da massa magra
+var MM= P / 0.75; //Massa corporal ideal (para mulheres)
+var MDD= P -MM;//Massa corporal desviante (para mulheres)
 
+  document.getElementById("Percentual").innerHTML=C.toFixed(2);
+  document.getElementById("absoluta").innerHTML=GA.toFixed(2);
+  document.getElementById("magra").innerHTML=P.toFixed(2);
+  document.getElementById("ideal").innerHTML=MM.toFixed(2);
+  document.getElementById("excesso").innerHTML=MDD.toFixed(2);
 
-  document.getElementById("HOMENS").innerHTML=H.toFixed(2);
-  document.getElementById("MULHERES").innerHTML = C.toFixed(2);
 
  };
 
+
+//1. Percentual_de_Gordura (%)
+//2. Gordura_absoluta (kg)
+//3. Massa_magra_absoluta (kg)
+//4. Massa_corporal_ideal (kg)
+//5. Massa_corporal_em_excesso (kg)
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //DENS = 1.10938 – 0.0008267 (PE+AB+CO) + 0.0000016 (PE+AB+CO)2 – 0.0002574 (ID);
 
 //DENS para HOMENS de 18 a 61 anos:
@@ -76,35 +104,38 @@ var P = PE - GA;//Cálculo da massa magra
 </script>
 </head>
 <body>
-<div class="bgimg">
-
-<input id="Peso" type="number"   min="0" max="200" placeholder="Peso" required  ><br><br>
-<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required >
-<select Id="sexo" name="sexo"> <option value="Seleção">Homem</options> <option value="Seleção">Mulher</options> </select> <br><br>
+<div style="padding-right:60px">
+<div style=" padding-left: 100px ">
 <div id="coluna_esquerda">
 <p>Homens</p>
-<input id="Peitoral" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Peitoral" required="required"><br><br>
-<input id="Abdominal" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Abdominal" required="required" ><br><br>
-<input id="Coxa" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="coxa">
-</div>
+<input id="Peso" type="number"   min="0" max="200" placeholder="Peso" required  ><br><br>
+<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required >
+<input id="Peitoral" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Peitoral" required><br><br>
+<input id="Abdominal" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Abdominal" required><br><br>
+<input id="Coxa" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="coxa" required> 
+<button class="button" type="button" onclick ="Calcular()">Calcular</button><br>
+ <p ><b>Percentual de Gordura (%) <span id="Percentual_de_Gordura"></span>
+  <p ><b>Gordura absoluta (kg) <span id="Gordura_absoluta"></span>
+  <p ><b> Massa magra absoluta (kg) <span id="Massa_magra_absoluta"></span>
+  <p ><b>Massa corporal ideal (kg) <span id="Massa_corporal_ideal"></span>
+  <p ><b>Massa corporal em excesso (kg) <span id="Massa_corporal_em_excesso"></span>
+   </div>
+
+
 <div id="coluna_direita">
    <p>Mulheres</p>
-<input id="Triceps" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Tríceps" ><br><br>
-<input id="Supra" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Supra-ilíaca" ><br><br>
-<input id="Coxax" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Coxa" ><br><br>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<button class="button" type="button" onclick ="Calcular()">Calcular</button><br>
- <p ><b> T1: <span id="HOMENS"></span>
-    <p > T2 : <span Id="MULHERES"></span><h1></font>
-
-
+   <input id="Peso" type="number"   min="0" max="200" placeholder="Peso" required  ><br><br>
+<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required >
+<input id="Triceps" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Tríceps" required><br><br>
+<input id="Supra" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Supra-ilíaca" required><br><br>
+<input id="Coxax" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Coxa" required > 
+<button class="button" type="button" onclick ="CalcularM()">Calcular</button><br>
+<p ><b>Percentual de Gordura (%) <span id="Percentual"></span>
+  <p ><b>Gordura absoluta (kg) <span id="absoluta"></span>
+  <p ><b> Massa magra absoluta (kg) <span id="magra"></span>
+  <p ><b>Massa corporal ideal (kg) <span id="ideal"></span>
+  <p ><b>Massa corporal em excesso (kg) <span id="excesso"></span>
+  </div>
+  </div>
+  </div>
 </body></html>

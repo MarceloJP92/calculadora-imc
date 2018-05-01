@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Composição Corporal</title>
+	<title> Composição Corpora</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style type="text/css">
-	
-	div#coluna_esquerda {	float: left;	border: 5px;	height: 80px; }
+	body,h1,h5,h3,h2 {font-family: Montserrat, sans-serif }  
+body, html {background-color: #00EEEE}
+	div#coluna_esquerda {	float: left;	border: 5px;	height: 80px;  }
 	div#coluna_direita {	float: left;	border: 6px;	height: 70px;	}
 
 .bgimg {
    
-    background-image: url('/img/money-2696229_960_720.jpg');
-     background-repeat: no-repeat;
+    background-image: url('/img/images2.jpg');
+    background-repeat: no-repeat;
     background-size: 100% 100%;
+    
   } 
 
 	</style>
@@ -46,6 +52,7 @@ var MD= P -MI;//Massa corporal desviante (para homens)
   document.getElementById("Massa_magra_absoluta").innerHTML=P.toFixed(2);
   document.getElementById("Massa_corporal_ideal").innerHTML=MI.toFixed(2);
   document.getElementById("Massa_corporal_em_excesso").innerHTML=MD.toFixed(2);
+
  }
  
  function CalcularM()
@@ -70,8 +77,12 @@ var MDD= P -MM;//Massa corporal desviante (para mulheres)
   document.getElementById("magra").innerHTML=P.toFixed(2);
   document.getElementById("ideal").innerHTML=MM.toFixed(2);
   document.getElementById("excesso").innerHTML=MDD.toFixed(2);
-
-
+  
+  }
+  function limpar()
+  {
+document.getElementById("C").reset();
+//document.C.reset();
  };
 
 
@@ -104,16 +115,40 @@ var MDD= P -MM;//Massa corporal desviante (para mulheres)
 </script>
 </head>
 <body>
+  
 <div style="padding-right:60px">
-<!--div style=" padding-left: 100px "-->
-<div id="coluna_esquerda">
+<div style=" padding-left: 100px ">
+	<p><h2>Composição Corporal</h2></p>
+	<h3><br> O peso corporal divide-se em: massa magra e massa gorda. A massa magra é formada pelos músculos, ossos e órgãos vitais, enquanto a massa gorda é formada somente por gordura. A gordura possui funções vitais como proteção de órgãos, isolamento térmico e síntese de hormônios, mas em excesso pode ser prejudicial à saúde.
+<br>Sozinho, o IMC não é indicador suficiente da gravidade do excesso de peso, pois o tipo de distribuição da gordura pelo organismo também é importante.
+<br>A importância da avaliação da composição corporal na prática clínica é a seguinte: caso um halterofilista, por exemplo, seja classificado apenas pelo IMC, apesar de possuir pouquíssima quantidade de gordura corporal, seria considerado obeso. Além disso, muitas pessoas consideradas magras (IMC dentro da normalidade), possuem a maior parte do seu corpo composto por gordura, sendo então obesas em relação à sua composição corporal.
+        
+<p>Padrão de gordura corporal para homens e mulheres:</p>
+<table border="2" color=black class="bgimg"> 
+  <tr><td>  </td><td>HOMENS</td><td>MULHERES</td></tr>
+  <tr><td>RISCO</td><td>< 5%</td><td>< 8%</td></tr>
+  <tr><td>MÉDIA</td><td>  15%</td><td>23%</td></tr>
+  <tr><td>RISCO</td><td>> 25%</td><td>> 32%</td></tr>
+</table>
+<p>Porque avaliar a composição corporal?
+<br>Nível alto ou excessivamente baixo de gordura é prejudicial;
+<br>Estabelece peso ótimo para saúde e o desempenho de atletas;
+<br>Formular um plano alimentar e prescrição dos exercícios com finalidade de modificar a composição corporal e avaliar sua eficácia;
+<br>Monitorar as mudanças na composição corporal que ocorrem com o crescimento, maturação e envelhecimento a fim de distinguir modificações normais dos estados patológicos.
+<br>*Artigo escrito pela colunista Dra. Ingrid Seiler Prior | Nutricionista especialista em Fisiologia do Exercício pela Universidade Gama Filho e em Obesidade e Emagrecimento pela Universidade Federal de São Paulo. Docente do curso técnico de Nutrição no Colégio Marquês de Olinda.
+<h2>Vamos calcular Composição Corporal</h2>
+<h3>*todos os campos devem ser preenchidos</h3>
+
+<div id="coluna_esquerda" >
 <p>Homens</p>
+<form name="C">
 <input id="Peso" type="number"   min="0" max="200" placeholder="Peso" required  ><br><br>
-<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required > <br><br>
+<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required >
 <input id="Peitoral" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Peitoral" required><br><br>
 <input id="Abdominal" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Abdominal" required><br><br>
-<input id="Coxa" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="coxa" required> <br><br>
-<button class="button" type="button" onclick ="Calcular()">Calcular</button><br>
+<input id="Coxa" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="coxa" required> 
+<button class="button" type="button" onclick ="Calcular()">Calcular</button>
+<button type="reset" value="limpar">Limpar</button>
  <p ><b>Percentual de Gordura (%) <span id="Percentual_de_Gordura"></span>
   <p ><b>Gordura absoluta (kg) <span id="Gordura_absoluta"></span>
   <p ><b> Massa magra absoluta (kg) <span id="Massa_magra_absoluta"></span>
@@ -125,11 +160,13 @@ var MDD= P -MM;//Massa corporal desviante (para mulheres)
 <div id="coluna_direita">
    <p>Mulheres</p>
    <input id="Peso" type="number"   min="0" max="200" placeholder="Peso" required  ><br><br>
-<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required > <br><br>
+<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required >
 <input id="Triceps" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Tríceps" required><br><br>
 <input id="Supra" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Supra-ilíaca" required><br><br>
-<input id="Coxax" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Coxa" required > <br><br>
-<button class="button" type="button" onclick ="CalcularM()">Calcular</button><br>
+<input id="Coxax" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Coxa" required > 
+<button class="button" type="button" onclick ="CalcularM()">Calcular</button>
+<button type="reset" value="limpar">Limpar</button>
+</form>
 <p ><b>Percentual de Gordura (%) <span id="Percentual"></span>
   <p ><b>Gordura absoluta (kg) <span id="absoluta"></span>
   <p ><b> Massa magra absoluta (kg) <span id="magra"></span>
@@ -138,4 +175,27 @@ var MDD= P -MM;//Massa corporal desviante (para mulheres)
   </div>
   </div>
   </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br> <p>* estimada para população geral. Não necessariamente indivíduos abaixo dessa estimativa são
+considerados não saudáveis – especialmente se fisicamente ativos.</p>
+</div>
 </body></html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Composição Corpora</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style type="text/css">
+	body,h1,h5,h3,h2 {font-family: Montserrat, sans-serif }  
+body, html {background-color: #00EEEE}
+	div#coluna_esquerda {	float: left;	border: 5px;	height: 80px;  }
+	div#coluna_direita {	float: left;	border: 6px;	height: 100px;	}
+
+.bgimg {
+   
+    background-image: url('img/images2.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+  } 
+#caixa1{
+        /*definimos a largura do box*/
+      width:300px;
+        /* definimos a altura do box */
+      height:450px;
+        /* definimos a cor de fundo do box */
+    border-style: double; 
+      
+    }
+    #caixa2{
+        /*definimos a largura do box*/
+      width:300px;
+        /* definimos a altura do box */
+      height:450px;
+        /* definimos a cor de fundo do box */
+      border-style: double;
+      
+      
+      
+	</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+function Calcular()
+  {
+var PS = parseFloat($("#Peso").val());
+var PE = parseFloat($("#Peitoral").val());
+var AB = parseFloat($("#Abdominal").val());
+var CO = parseFloat($("#Coxa").val());
+//var TR = parseFloat($("#Triceps").val());
+//var SU = parseFloat($("#Supra").val());
+var ID = parseFloat($("#Idade").val());
+//var CX = parseFloat($("#Coxax").val());
+
+var J=PE+AB+CO; // soma de (Peitoral+Abdominal+Coxa)
+//var N=TR+SU+CX; // soma de (Triceps+Supra+Coxax)
+var H = 1.10938 - 0.0008267 *(J)+0.0000016 *(J)*2- 0.0002574 *(ID);
+//var M =1.099421 - 0.0009929 *(N)+ 0.0000023 *(N)*2- 0.0001392 *(ID);
+var G= [(4.95 / H) - 4.50] * 100;// gordura relativa 
+//var C= [(4.95 / M) - 4.50] * 100;//gordura relativa 
+var D=PS*G; // DENS + peso
+var GA=D/ 100; // gordura absoluta
+var P= PS - GA;//Cálculo da massa magra
+var MI= P / 0.85;// Massa corporal ideal (para homens)
+//var MM= P / 0.75; //Massa corporal ideal (para mulheres)
+var MD= P -MI;//Massa corporal desviante (para homens)
+//var MDD= P -MM;//Massa corporal desviante (para mulheres)
+  document.getElementById("Percentual_de_Gordura").innerHTML=G.toFixed(2);
+  document.getElementById("Gordura_absoluta").innerHTML=GA.toFixed(2);
+  document.getElementById("Massa_magra_absoluta").innerHTML=P.toFixed(2);
+  document.getElementById("Massa_corporal_ideal").innerHTML=MI.toFixed(2);
+  document.getElementById("Massa_corporal_em_excesso").innerHTML=MD.toFixed(2);
+
+ }
+ 
+ function CalcularM()
+  {
+var ID = parseFloat($("#Idade").val());
+var PS = parseFloat($("#Peso").val());
+var TR = parseFloat($("#Triceps").val());
+var SU = parseFloat($("#Supra").val());
+var CX = parseFloat($("#Coxax").val());
+
+var N=TR+SU+CX; // soma de (Triceps+Supra+Coxax)
+var M =1.099421 - 0.0009929 *(N)+ 0.0000023 *(N)*2- 0.0001392 *(ID);
+var C= [(4.95 / M) - 4.50] * 100;//gordura relativa 
+var D=PS*C; // DENS + peso
+var GA=D/ 100; // gordura absoluta
+var P= PS - GA;//Cálculo da massa magra
+var MM= P / 0.75; //Massa corporal ideal (para mulheres)
+var MDD= P -MM;//Massa corporal desviante (para mulheres)
+
+  document.getElementById("Percentual").innerHTML=C.toFixed(2);
+  document.getElementById("absoluta").innerHTML=GA.toFixed(2);
+  document.getElementById("magra").innerHTML=P.toFixed(2);
+  document.getElementById("ideal").innerHTML=MM.toFixed(2);
+  document.getElementById("excesso").innerHTML=MDD.toFixed(2);
+  
+  }
+  function limpar()
+  {
+document.getElementById("C").reset();
+//document.C.reset();
+ };
+
+
+//1. Percentual_de_Gordura (%)
+//2. Gordura_absoluta (kg)
+//3. Massa_magra_absoluta (kg)
+//4. Massa_corporal_ideal (kg)
+//5. Massa_corporal_em_excesso (kg)
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+//DENS = 1.10938 – 0.0008267 (PE+AB+CO) + 0.0000016 (PE+AB+CO)2 – 0.0002574 (ID);
+
+//DENS para HOMENS de 18 a 61 anos:
+//DENS = 1.10938 – 0.0008267 (X1) + 0.0000016 (X1)2 – 0.0002574 (X3)
+//DENS para MULHERES de 18 a 55 anos:
+//DENS = 1.099421 – 0.0009929 (X2) + 0.0000023 (X2)2 – 0.0001392 (X3)
+//Onde:
+//X1 = Soma das dobras: peitoral, abdominal e coxa
+//X2 = Soma das dobras: tríceps, supra-ilíaca e coxa
+//X3 = idade em anos
+//PROTOCOLO DE CONVERSÃO DA DENSIDADE CORPORAL EM PERCENTUAL DE GORDURA:
+//%G = [(4.95 / DENS) – 4.50] x 100
+//- Cálculo da gordura relativa (%) = %G
+//- Cálculo da gordura absoluta (kg) = (peso corporal x %G) / 100
+//- Cálculo da massa magra (kg) = peso corporal – gordura absoluta
+//- Massa corporal ideal (kg)* = massa magra / 0.85 (para homens)
+//= massa magra / 0.75 (para mulheres)
+//- Massa corporal desviante (kg)* = massa magra – massa corporal ideal
+//* estimada para população geral. Não necessariamente indivíduos abaixo dessa estimativa são
+//considerados não saudáveis – especialmente se fisicamente ativos.
+</script>
+</head>
+<body>
+  
+<div style="padding-right:60px">
+<div style=" padding-left: 100px ">
+	<p><center><h2>Composição Corporal</h2></p></center>
+	<h3><br> O peso corporal divide-se em: massa magra e massa gorda. A massa magra é formada pelos músculos, ossos e órgãos vitais, enquanto a massa gorda é formada somente por gordura. A gordura possui funções vitais como proteção de órgãos, isolamento térmico e síntese de hormônios, mas em excesso pode ser prejudicial à saúde.
+<br>Sozinho, o IMC não é indicador suficiente da gravidade do excesso de peso, pois o tipo de distribuição da gordura pelo organismo também é importante.
+<br>A importância da avaliação da composição corporal na prática clínica é a seguinte: caso um halterofilista, por exemplo, seja classificado apenas pelo IMC, apesar de possuir pouquíssima quantidade de gordura corporal, seria considerado obeso. Além disso, muitas pessoas consideradas magras (IMC dentro da normalidade), possuem a maior parte do seu corpo composto por gordura, sendo então obesas em relação à sua composição corporal.
+       <center> <img src="img/adipometro.jpg"></center>
+<p>Padrão de gordura corporal para homens e mulheres:</p>
+<table border="2" color=black class="bgimg"> 
+  <tr><td>  </td><td>HOMENS</td><td>MULHERES</td></tr>
+  <tr><td>RISCO</td><td>< 5%</td><td>< 8%</td></tr>
+  <tr><td>MÉDIA</td><td>  15%</td><td>23%</td></tr>
+  <tr><td>RISCO</td><td>> 25%</td><td>> 32%</td></tr>
+</table>
+<p>Porque avaliar a composição corporal?
+<br>Nível alto ou excessivamente baixo de gordura é prejudicial;
+<br>Estabelece peso ótimo para saúde e o desempenho de atletas;
+<br>Formular um plano alimentar e prescrição dos exercícios com finalidade de modificar a composição corporal e avaliar sua eficácia;
+<br>Monitorar as mudanças na composição corporal que ocorrem com o crescimento, maturação e envelhecimento a fim de distinguir modificações normais dos estados patológicos.
+<br>*Artigo escrito pela colunista Dra. Ingrid Seiler Prior | Nutricionista especialista em Fisiologia do Exercício pela Universidade Gama Filho e em Obesidade e Emagrecimento pela Universidade Federal de São Paulo. Docente do curso técnico de Nutrição no Colégio Marquês de Olinda.
+<h2>Vamos calcular Composição Corporal</h2>
+<h3>*Todos os campos devem ser preenchidos<br>
+    * As medidas deve ser em milímetro (mm)
+</h3>
+
+<div id="coluna_esquerda">
+<div id="caixa1"><p>Homens</p>
+<form name="C">
+<input id="Peso" type="number"   min="0" max="200" placeholder="Peso" required  ><br><br>
+<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required >
+<input id="Peitoral" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Peitoral" required><br><br>
+<input id="Abdominal" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Abdominal" required><br><br>
+<input id="Coxa" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="coxa" required> 
+<button class="button" type="button" onclick ="Calcular()">Calcular</button>
+<button type="reset" value="limpar">Limpar</button>
+ <p ><b>Percentual de Gordura (%) <span id="Percentual_de_Gordura"></span>
+  <p ><b>Gordura absoluta (kg) <span id="Gordura_absoluta"></span>
+  <p ><b> Massa magra absoluta (kg) <span id="Massa_magra_absoluta"></span>
+  <p ><b>Massa corporal ideal (kg) <span id="Massa_corporal_ideal"></span>
+  <p ><b>Massa corporal em excesso (kg) <span id="Massa_corporal_em_excesso"></span>
+   </div></div>
+
+
+<div id="coluna_direita">
+<div id="caixa2">
+
+   <p>Mulheres</p>
+   <input id="Peso" type="number"   min="0" max="200" placeholder="Peso" required  ><br><br>
+<input id="Idade" type="number" min="18" max="61" placeholder="Idade" required >
+<input id="Triceps" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Tríceps" required><br><br>
+<input id="Supra" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Supra-ilíaca" required><br><br>
+<input id="Coxax" type="number" class="symbol-input100" step="0.001" min="0" max="200" placeholder="Coxa" required > 
+<button class="button" type="button" onclick ="CalcularM()">Calcular</button>
+<button type="reset" value="limpar">Limpar</button>
+</form>
+<p ><b>Percentual de Gordura (%) <span id="Percentual"></span>
+  <p ><b>Gordura absoluta (kg) <span id="absoluta"></span>
+  <p ><b> Massa magra absoluta (kg) <span id="magra"></span>
+  <p ><b>Massa corporal ideal (kg) <span id="ideal"></span>
+  <p ><b>Massa corporal em excesso (kg) <span id="excesso"></span>
+  </div>
+  </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br> <p>* Estimada para população geral. Não necessariamente indivíduos abaixo dessa estimativa são
+considerados não saudáveis – especialmente se fisicamente ativos.</p>
+</div>
+</body></html>
